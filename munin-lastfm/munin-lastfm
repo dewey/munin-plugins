@@ -1,0 +1,35 @@
+#!/usr/bin/env python
+import urllib.request
+import json
+import sys
+
+# Last.FM API credentials
+# http://www.last.fm/api/account/create
+username = 'username'
+token = 'token'
+
+def main():
+    try:
+        mode = sys.argv[1]
+    except IndexError:
+        mode = ""
+
+    if mode == "suggest":
+        print("playcount")
+        sys.exit(0)
+
+    if mode == "config":
+        print("graph_title Last.FM Playcount")
+        print("graph_vlabel Tracks scrobbled")
+        print("graph_category Last.FM")
+        print("playcount.label Tracks")
+        sys.exit(0)
+
+    else:
+        response = urllib.request.urlopen('http://ws.audioscrobbler.com/2.0/?method=user.getinfo&user=' + username + '&api_key=' + token + '&format=json')
+        content = response.read()
+        data = json.loads(content.decode('utf8'))
+        print("playcount.value", data["user"]["playcount"])
+
+if __name__ == '__main__':
+    main()
