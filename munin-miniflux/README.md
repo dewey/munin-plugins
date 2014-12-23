@@ -12,8 +12,8 @@ Make sure to edit `munin-miniflux_` and customize your miniflux API credentials 
 ## Installation
 - Clone repository
 - Create a link to:
-	- `/etc/munin/plugins/munin_miniflux_read` 
-	- `/etc/munin/plugins/munin_miniflux_unread`
+	- `/etc/munin/plugins/munin-miniflux_read` 
+	- `/etc/munin/plugins/munin-miniflux_unread`
 
 ## Screenshot
 
