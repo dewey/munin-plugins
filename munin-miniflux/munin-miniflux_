@@ -1,0 +1,51 @@
+#!/usr/bin/env python
+# Repository: https://github.com/dewey
+import requests
+import json
+import sys
+
+# Miniflux API Settings:
+# These values are shown on https://rss.example.com/?action=api
+username = 'username'
+token = 'token'
+endpoint = 'https://rss.example.com/jsonrpc.php'
+
+def main():
+    try:
+        mode = sys.argv[1]
+    except IndexError:
+        mode = ""
+    wildcard = sys.argv[0].split("munin-miniflux_")[1].split("_")[0]
+
+    if mode == "suggest":
+        print("unread")
+        sys.exit(0)
+
+    if wildcard == "unread":
+        if mode == "config":
+            print("graph_title Unread RSS Feeds")
+            print("graph_vlabel Unread feed items")
+            print("graph_category rss")
+            print("rss_unread.label Feed items")
+            sys.exit(0)
+
+        else:
+            api_get_unread = '{"jsonrpc": "2.0", "method": "item.count_unread", "id": 1}'
+            r = requests.post(endpoint, auth=(username, token), data=api_get_unread)
+            print('rss_unread.value', r.json()['result'])
+
+
+    if wildcard == "read":
+        if mode == "config":
+            print("graph_title Read RSS Feeds")
+            print("graph_vlabel Read feed items")
+            print("graph_category rss")
+            print("rss_read.label Feed items")
+            sys.exit(0)
+        else:
+            api_get_read = '{"jsonrpc": "2.0", "method": "item.count_read", "id": 1}'
+            r = requests.post(endpoint, auth=(username, token), data=api_get_read)
+            print('rss_read.value', r.json()['result'])
+
+if __name__ == '__main__':
+    main()
