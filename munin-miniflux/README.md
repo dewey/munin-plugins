@@ -17,4 +17,4 @@ Make sure to edit `munin-miniflux_` and customize your miniflux API credentials 
 
 ## Screenshot
 
-![Screenshot](https://img.notmyhostna.me/4edfd604383f3a271355dee9565728bd2360c6ab.png)
+![Screenshot](https://img.notmyhostna.me/b628d9a6299624eb5b9f39ea5e72cfa39c3a79a3.png)
